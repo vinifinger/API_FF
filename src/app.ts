@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { routes } from './routes';
 import { middlewareController } from './useCases/Middleware';
+import { readUserController } from './useCases/User/ReadUser';
 
 const app = express();
 

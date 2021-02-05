@@ -1,5 +1,5 @@
 {
-  "name": "api_concessionaria",
+  "name": "api_ff",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",

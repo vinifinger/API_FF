@@ -18,7 +18,6 @@ export class MysqlUserRepository implements IUserRepository {
         }
     }
 
-
     async createUser(user: User): Promise<User> {
     
         const {
