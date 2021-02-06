@@ -7,11 +7,11 @@ export class DeleteUserController {
     ){}
 
     async handle(req: Request, res: Response): Promise<Response> {
-       const id = parseInt(req.params.id);
+       const hash = req.params.hash.toString();
 
        try {
             const result = await this.deleteUserUseCase.execute({
-                id
+                hash
            });
 
            return res.status(201).json({ result });

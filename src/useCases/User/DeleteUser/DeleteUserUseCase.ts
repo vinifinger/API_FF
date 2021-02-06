@@ -9,7 +9,7 @@ export class DeleteUserUseCase {
     ){}
     
     async execute(data: IDeleteUserRequestDTO) {
-        const user = new User([data]);
+        const user = new User(data, data.hash);
         
         await this.userRepository.deleteUser(user);
 

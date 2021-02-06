@@ -7,14 +7,46 @@ export class UpdateUserController {
     ){}
 
     async handle(req: Request, res: Response): Promise<Response> {
-       const id = parseInt(req.params.id);
+       const hash = req.params.hash.toString();
+       const {
+            name,
+            surname,
+            email,
+            cpf,
+            rg,
+            username,
+            password,
+            telephone,
+            sex,
+            marital_status,
+            end_state,
+            end_city,
+            end_number,
+            end_district,
+            end_cep
+        } = req.body;
 
        try {
             const result = await this.updateUserUseCase.execute({
-                id
+                hash,
+                name,
+                surname,
+                email,
+                cpf,
+                rg,
+                username,
+                password,
+                telephone,
+                sex,
+                marital_status,
+                end_state,
+                end_city,
+                end_number,
+                end_district,
+                end_cep
            });
 
-           return res.status(201).json({ result });
+           return res.status(200).json({ result });
        } catch (err) {
            return res.status(400).json({
                message: err.message || 'Unexpected error.'

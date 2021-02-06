@@ -1,3 +1,3 @@
 export interface IDeleteUserRequestDTO {
-    id: number
+    hash: string
 }

@@ -21,9 +21,22 @@ export class MysqlUserRepository implements IUserRepository {
     async createUser(user: User): Promise<User> {
     
         const {
-            email,
+            hash,
             name,
-            password
+            surname,
+            email,
+            cpf,
+            rg,
+            username,
+            password,
+            telephone,
+            sex,
+            marital_status,
+            end_state,
+            end_city,
+            end_number,
+            end_district,
+            end_cep
         } = user;
     
         const trx = await db.transaction();
@@ -31,9 +44,23 @@ export class MysqlUserRepository implements IUserRepository {
         try {
             
             await trx('user').insert({
-                email,
+                hash,
                 name,
-                password
+                surname,
+                email,
+                cpf,
+                rg,
+                status: 1,
+                username,
+                password,
+                telephone,
+                sex,
+                marital_status,
+                end_state,
+                end_city,
+                end_number,
+                end_district,
+                end_cep
             });
 
             trx.commit();
@@ -48,8 +75,7 @@ export class MysqlUserRepository implements IUserRepository {
 
         try {
             
-            const data = await db('user');
-
+            const data = await db('user').where('status', 1);
             return new User(data);
 
         } catch (err) {
@@ -60,10 +86,22 @@ export class MysqlUserRepository implements IUserRepository {
     async updateUser(user: User): Promise<number | Error> {
 
         const {
-            id,
-            email,
+            hash,
             name,
-            password
+            surname,
+            email,
+            cpf,
+            rg,
+            username,
+            password,
+            telephone,
+            sex,
+            marital_status,
+            end_state,
+            end_city,
+            end_number,
+            end_district,
+            end_cep
         } = user;
 
         try {
@@ -71,11 +109,22 @@ export class MysqlUserRepository implements IUserRepository {
             const trx = await db.transaction();
 
             await trx('user').update({
-                email,
                 name,
-                password
-            }).where('id', id);
-
+                surname,
+                email,
+                cpf,
+                rg,
+                username,
+                password,
+                telephone,
+                sex,
+                marital_status,
+                end_state,
+                end_city,
+                end_number,
+                end_district,
+                end_cep
+            }).where('hash', hash);
 
             trx.commit();
 
@@ -87,7 +136,7 @@ export class MysqlUserRepository implements IUserRepository {
 
     async deleteUser(user: User): Promise<number | Error> {
         
-        const { id } = user;
+        const { hash } = user;
         
         const trx = await db.transaction();
 
@@ -95,7 +144,7 @@ export class MysqlUserRepository implements IUserRepository {
             
             await trx('user').update({
                 status: 0
-            }).where('id', id);
+            }).where('hash', hash);
 
             trx.commit();
 

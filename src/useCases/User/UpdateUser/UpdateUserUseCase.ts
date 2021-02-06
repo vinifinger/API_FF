@@ -9,7 +9,7 @@ export class UpdateUserUseCase {
     ){}
     
     async execute(data: IUpdateUserRequestDTO) {
-        const user = new User([data]);
+        const user = new User(data, data.hash);
         
         return await this.userRepository.updateUser(user);
     }

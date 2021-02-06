@@ -1,12 +1,30 @@
+import { uuid } from "uuidv4";
+
 export class User {
     public readonly id?: number;
-    public token?: string;
-    public email?: string;
+    public hash?: string;
     public name?: string;
+    public surname?: string;
+    public email?: string;
+    public cpf?: string;
+    public rg?: string;
+    public status?: Number;
+    public username?: string;
     public password?: string;
+    public telephone?: string;
+    public sex?: string;
+    public marital_status?: string;
+    public end_state?: string;
+    public end_city?: string;
+    public end_number?: string;
+    public end_district?: string;
+    public end_cep?: string;
 
-    constructor(props: User[]) {
+    constructor(props: User | User[], hash?: string | string[]) {
         Object.assign(this, props);
 
+        if ( !hash && props ) {
+            this.hash = uuid();
+        }
     }
 }

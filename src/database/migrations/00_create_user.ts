@@ -1,15 +1,17 @@
 import * as knex from 'knex';
+import { uuid } from "uuidv4";
 
 export async function up(knex: knex) {
     await knex.schema.createTable('user', table => {
         table.increments('id').primary();
-        table.uuid('hash').notNullable();
+        table.uuid('hash');
         table.string('name');
         table.string('surname');
         table.string('email');
         table.string('cpf');
         table.string('rg');
-        table.string('user');
+        table.integer('status');
+        table.string('username');
         table.string('password');
         table.string('telephone');
         table.string('sex');
@@ -23,11 +25,13 @@ export async function up(knex: knex) {
 
     await knex('user').insert({
         name: 'nome',
+        hash: uuid(),
         surname: 'sobrenome',
         email: 'root@root.com',
         cpf: '1234567890',
         rg: '1234567890',
-        user: 'Usuario',
+        status: 1,
+        username: 'Usuario',
         password: 'Senha',
         telephone: '(51) 99999-9999',
         sex: 'M',
