@@ -7,6 +7,7 @@ import { createCarController } from './useCases/Car/CreateCar';
 import { readCarController } from './useCases/Car/ReadCar';
 import { updateCarController } from './useCases/Car/UpdateCar';
 import { deleteCarController } from './useCases/Car/DeleteCar';
+import { loginUserController } from './useCases/User/LoginUser';
 
 const routes = Router();
 
@@ -29,6 +30,10 @@ routes.patch('/user/:hash', (request, response) => {
 
 routes.delete('/user/:hash', (request, response) => {
     return deleteUserController.handle(request, response);
+});
+
+routes.post('/user/login', (request, response) => {
+    return loginUserController.handle(request, response);
 });
 
 

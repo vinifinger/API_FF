@@ -5,6 +5,8 @@ import { User } from "../../entities/User";
 import { IUserRepository } from "../IUserRepository";
 import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
+import { AES, enc } from "crypto-ts";
+import { deleteCarController } from "../../useCases/Car/DeleteCar";
 dotenv.config();
 
 export class MysqlUserRepository implements IUserRepository {
@@ -166,7 +168,7 @@ export class MysqlUserRepository implements IUserRepository {
         return new Token(result);
     };
 
-    async loginUser(user: User): Promise<User | number> {
+    async loginUser(user: User): Promise<User> {
 
         const {
             email,
@@ -174,14 +176,22 @@ export class MysqlUserRepository implements IUserRepository {
         } = user;
 
         try {
-            const data = await db('user').where('email', email).andWhere('password', password).limit(1);
+            const data = await db('user').where('email', email).limit(1);
 
             if (!data.length) 
-                return 0
+                throw new Error('Invalid email and / or password.');
 
-            const users = new User(data[0]);
+            const decryptPassword = AES.decrypt(data[0].password.toString(), process.env.SECRET_STRING).toString(enc.Utf8);
 
-            return users;
+            if (decryptPassword == password){
+                const users = new User(data[0]);
+
+                return users;
+            } else {
+                throw new Error('Invalid email and / or password.');
+            }
+
+            
         } catch (err) {
             throw new Error(err);
         }

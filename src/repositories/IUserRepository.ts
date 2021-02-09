@@ -12,7 +12,7 @@ export interface IUserRepository {
 
     deleteUser(user: User): Promise<number | Error>;
 
-    loginUser(user: User): Promise<User | number>;
+    loginUser(user: User): Promise<User>;
 
     createToken(user: User): Promise<Token>;
 
