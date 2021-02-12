@@ -1,0 +1,386 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "Esse é um prototipo de documentação utilizando Swagger",
+        "version": "1.0.0",
+        "title": "API FF",
+        "contact": {
+            "email": "vinifinger92@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http"],
+    "host": "localhost:3000",
+    "basePath": "/",
+    "paths" : {
+        "/user" : {
+            "post": {
+                "tags": ["User"],
+                "summary" : "Create User",
+                "requestBody": {
+                    "description": "Inserir um novo usuário",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/User/post"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created | Usuário foi criado"
+                    },
+                    "409": {
+                        "description": "Conflict | Email already exists.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/InvalidResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get" : {
+                "tags": ["User"],
+                "summary" : "Read User",
+                "description": "Buscar todos os usuários",
+                "responses": {
+                    "200": {
+                        "description": "OK | Sucesso na operação",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/User/get"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request | Algo deu errado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/InvalidResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{hash}": {
+            "patch": {
+                "tags": ["User"],
+                "summary" : "Update User",
+                "description": "Alterar um usuário",
+                "parameters": [
+                    {
+                        "name": "hash",
+                        "in": "path",
+                        "description": "Hash do usuário",
+                        "required": true,
+                        "type": "string"
+                    }
+                ]
+                ,
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/User/patch"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK | Usuário foi alterado"
+                    },
+                    "409": {
+                        "description": "Conflict | ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/InvalidResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["User"],
+                "summary" : "Delete User",
+                "description": "Deletar um usuário",
+                "parameters": [
+                    {
+                        "name": "hash",
+                        "in": "path",
+                        "description": "Hash do usuário",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK | Usuário foi deletado"
+                    },
+                    "409": {
+                        "description": "Conflict | Usuário não existe",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/InvalidResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": ["User"],
+                "summary" : "Login User",
+                "requestBody": {
+                    "description": "Logar com um usuário",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/User/login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK | Usuário foi logado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/User/loginResponse"
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Not Acceptable | Email e/ou senha inválido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/InvalidResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "User": {
+            "post": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "rg": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "telephone": {
+                        "type": "string"
+                    },
+                    "sex": {
+                        "type": "string"
+                    },
+                    "marital_status": {
+                        "type": "string"
+                    },
+                    "end_state": {
+                        "type": "string"
+                    },
+                    "end_city": {
+                        "type": "string"
+                    },
+                    "end_number": {
+                        "type": "string"
+                    },
+                    "end_district": {
+                        "type": "string"
+                    },
+                    "end_cep": {
+                        "type": "string"
+                    }
+                }
+            },
+            "get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "hash": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "rg": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "integer"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "telephone": {
+                        "type": "string"
+                    },
+                    "sex": {
+                        "type": "string"
+                    },
+                    "marital_status": {
+                        "type": "string"
+                    },
+                    "end_state": {
+                        "type": "string"
+                    },
+                    "end_city": {
+                        "type": "string"
+                    },
+                    "end_number": {
+                        "type": "string"
+                    },
+                    "end_district": {
+                        "type": "string"
+                    },
+                    "end_cep": {
+                        "type": "string"
+                    }
+                }
+            },
+            "patch": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "rg": {
+                        "type": "string"
+                    },
+                    "telephone": {
+                        "type": "string"
+                    },
+                    "sex": {
+                        "type": "string"
+                    },
+                    "marital_status": {
+                        "type": "string"
+                    },
+                    "end_state": {
+                        "type": "string"
+                    },
+                    "end_city": {
+                        "type": "string"
+                    },
+                    "end_number": {
+                        "type": "string"
+                    },
+                    "end_district": {
+                        "type": "string"
+                    },
+                    "end_cep": {
+                        "type": "string"
+                    }
+                }
+            },
+            "login": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "loginResponse": {
+                "properties": {
+                    "result": {
+                        "type": "object",
+                        "properties": {
+                            "token": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

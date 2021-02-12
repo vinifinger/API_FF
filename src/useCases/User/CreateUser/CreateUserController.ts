@@ -25,6 +25,8 @@ export class CreateUserController {
             end_cep 
         } = req.body;
 
+        console.log(req.body.email);
+
        try {
             const result = await this.createUserUseCase.execute({
                 name,
