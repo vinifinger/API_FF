@@ -4,7 +4,7 @@ export class Car {
     public hash?: string;
     public car_name?: string;
     public car_model?: string;
-    public car_mark?: string;
+    public car_mark?: number;
     public car_plate?: string;
     public car_brake?: string;
     public car_engine?: number;
@@ -19,7 +19,7 @@ export class Car {
     public car_color?: string;
     public car_fuel?: string;
 
-    constructor(props: Car | Car[], hash?: string | string[]) {
+    constructor(props: Car, hash?: string) {
         Object.assign(this, props);
 
         if ( !hash && props ) {

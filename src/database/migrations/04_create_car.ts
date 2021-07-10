@@ -7,10 +7,12 @@ export async function up(knex: knex) {
         table.uuid('hash');
         table.string('car_name');
         table.string('car_model');
-        table.string('car_mark');
+        table.integer('car_mark').unsigned();
+        table.foreign('car_mark').references('car_mark.id');
         table.string('car_plate');
         table.dateTime('date_insert').defaultTo(knex.fn.now());
-        table.integer('car_status');
+        table.integer('car_status').unsigned();
+        table.foreign('car_status').references('car_status.id');
         table.string('car_brake');
         table.float('car_engine');
         table.integer('car_valve');
@@ -23,13 +25,14 @@ export async function up(knex: knex) {
         table.float('car_mileage');
         table.string('car_color');
         table.string('car_fuel');
+        table.string('date_sale');
     });
 
     await knex('car').insert({
         hash: v4(),
         car_name: 'Fit',
         car_model: 'CVT',
-        car_mark: 'Honda',
+        car_mark: 1,
         car_plate: 'ABC-9090',
         car_status: 1,
         car_brake: 'ABS',

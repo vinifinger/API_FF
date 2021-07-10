@@ -8,6 +8,10 @@ import { readCarController } from './useCases/Car/ReadCar';
 import { updateCarController } from './useCases/Car/UpdateCar';
 import { deleteCarController } from './useCases/Car/DeleteCar';
 import { loginUserController } from './useCases/User/LoginUser';
+import { readCarMarkController } from './useCases/Car/ReadCarMark';
+import { saleCarController } from './useCases/Car/SaleCar';
+import { readAllCarController } from './useCases/Car/ReadAllCar';
+import { readCarByFilterController } from './useCases/Car/ReadCarByFilter';
 
 const routes = Router();
 
@@ -46,12 +50,29 @@ routes.get('/v1/car', (request, response) => {
     return readCarController.handle(request, response);
 });
 
+routes.get('/v1/car/filter/', (request, response) => {
+    return readCarByFilterController.handle(request, response);
+});
+
+routes.get('/v1/car/all', (request, response) => {
+    return readAllCarController.handle(request, response);
+});
+
+routes.get('/v1/car/mark', (request, response) => {
+    return readCarMarkController.handle(request, response);
+});
+
+
 routes.patch('/v1/car/:hash', (request, response) => {
     return updateCarController.handle(request, response);
 });
 
 routes.delete('/v1/car/:hash', (request, response) => {
     return deleteCarController.handle(request, response);
+});
+
+routes.patch('/v1/car/sale/:hash', (request, response) => {
+    return saleCarController.handle(request, response);
 });
 
 export { routes };

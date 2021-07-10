@@ -2,7 +2,7 @@ export interface ICreateCarRequestDTO {
     hash?: string;
     car_name?: string;
     car_model?: string;
-    car_mark?: string;
+    car_mark?: number;
     car_plate?: string;
     car_brake?: string;
     car_engine?: number;

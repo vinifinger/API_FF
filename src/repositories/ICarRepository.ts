@@ -1,4 +1,5 @@
 import { Car } from "../entities/Car";
+import { CarMark } from "../entities/CarMark";
 
 export interface ICarRepository {
     findCarByPlate(car_plate: string): Promise<Car>;
@@ -7,7 +8,15 @@ export interface ICarRepository {
     
     readCar(): Promise<Car[]>;
 
+    readCarByFilter(car: Car): Promise<Car[]>;
+
+    readAllCar(): Promise<Car[]>;
+
+    readCarMark(): Promise<CarMark[]>;
+
     updateCar(user: Car): Promise<void | Error>;
 
     deleteCar(user: Car): Promise<void | Error>;
+
+    saleCar(user: Car): Promise<void | Error>;
 }

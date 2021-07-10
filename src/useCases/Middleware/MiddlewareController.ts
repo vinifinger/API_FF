@@ -7,9 +7,10 @@ export class MiddlewareController {
     ){}
 
     async handle(req: Request, res: Response, next: NextFunction): Promise<Response> {
-       const token = req.headers.token.toString();
 
        try {
+
+            const token = req.headers.token.toString();
             const response = await this.middlewareUseCase.execute({
                 token
            });
