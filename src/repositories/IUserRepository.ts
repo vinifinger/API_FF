@@ -6,7 +6,7 @@ export interface IUserRepository {
 
     createUser(user: User): Promise<User>;  
     
-    readUser(): Promise<User>;
+    readUser(): Promise<User[]>;
 
     updateUser(user: User): Promise<number | Error>;
 

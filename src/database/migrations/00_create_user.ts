@@ -1,3 +1,4 @@
+import { AES } from 'crypto-ts';
 import * as knex from 'knex';
 import { uuid } from "uuidv4";
 
@@ -32,7 +33,7 @@ export async function up(knex: knex) {
         rg: '1234567890',
         status: 1,
         username: 'Usuario',
-        password: 'Senha',
+        password: AES.encrypt('Senha', process.env.SECRET_STRING).toString(),
         telephone: '(51) 99999-9999',
         sex: 'M',
         marital_status: 'Estado Civil',

@@ -5,7 +5,7 @@ export interface ICarRepository {
 
     createCar(car: Car): Promise<void | Error>;  
     
-    readCar(): Promise<Car>;
+    readCar(): Promise<Car[]>;
 
     updateCar(user: Car): Promise<void | Error>;
 

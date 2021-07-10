@@ -22,7 +22,7 @@ export class JwtMiddlewareRepository implements IMiddlewareRepository {
 
             try {    
                 
-                const content = await db('User')
+                const content = await db('user')
                 .where('email', token.email)
                 .andWhere('password', token.password)
                 .limit(1);

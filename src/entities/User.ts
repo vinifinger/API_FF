@@ -22,7 +22,7 @@ export class User {
 
     constructor(props: User | User[], hash?: string | string[]) {
         Object.assign(this, props);
-
+        console.log(this.hash);
         if ( !hash && props ) {
             this.hash = uuid();
         }

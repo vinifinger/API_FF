@@ -70,12 +70,16 @@ export class MysqlCarRepository implements ICarRepository {
         }
     };
 
-    async readCar(): Promise<Car> {
+    async readCar(): Promise<Car[]> {
 
         try {
             const data = await db('car').where('car_status', 1);
-            return new Car(data);
+            const cars:Car[] = [];
+            data.forEach((i) => {
+                cars.push(new Car(i, i.hash));
+            });
 
+            return cars;
         } catch (err) {
             throw new Error(err);
         }

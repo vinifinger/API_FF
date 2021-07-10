@@ -16,7 +16,7 @@ const routes = Router();
 // });
 
 // User ----------
-routes.get('/user', (request, response) => {
+routes.get('/v1/user', (request, response) => {
     return readUserController.handle(request, response);
 });
 
@@ -24,11 +24,11 @@ routes.post('/user', (request, response) => {
     return createUserController.handle(request, response);
 });
 
-routes.patch('/user/:hash', (request, response) => {
+routes.patch('v1/user/:hash', (request, response) => {
     return updateUserController.handle(request, response);
 });
 
-routes.delete('/user/:hash', (request, response) => {
+routes.delete('v1/user/:hash', (request, response) => {
     return deleteUserController.handle(request, response);
 });
 
@@ -38,19 +38,19 @@ routes.post('/user/login', (request, response) => {
 
 
 // Car ----------
-routes.post('/car', (request, response) => {
+routes.post('v1/car', (request, response) => {
     return createCarController.handle(request, response);
 });
 
-routes.get('/car', (request, response) => {
+routes.get('/v1/car', (request, response) => {
     return readCarController.handle(request, response);
 });
 
-routes.patch('/car/:hash', (request, response) => {
+routes.patch('v1/car/:hash', (request, response) => {
     return updateCarController.handle(request, response);
 });
 
-routes.delete('/car/:hash', (request, response) => {
+routes.delete('v1/car/:hash', (request, response) => {
     return deleteCarController.handle(request, response);
 });
 

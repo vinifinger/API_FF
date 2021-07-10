@@ -11,7 +11,6 @@ export class ReadUserUseCase {
     async execute() {
 
         const data = await this.userRepository.readUser();
-        console.log(data);
-        return new User(data, data.hash); 
+        return data; 
     }
 }

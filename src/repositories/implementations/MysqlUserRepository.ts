@@ -1,12 +1,10 @@
 import { db } from "../../database/connection";
 import { Token } from "../../entities/Token";
 import { User } from "../../entities/User";
-//import { Users } from "../../entities/Users";
 import { IUserRepository } from "../IUserRepository";
 import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 import { AES, enc } from "crypto-ts";
-import { deleteCarController } from "../../useCases/Car/DeleteCar";
 dotenv.config();
 
 export class MysqlUserRepository implements IUserRepository {
@@ -40,7 +38,7 @@ export class MysqlUserRepository implements IUserRepository {
             end_district,
             end_cep
         } = user;
-    
+
         const trx = await db.transaction();
 
         try {
@@ -73,12 +71,17 @@ export class MysqlUserRepository implements IUserRepository {
         }
     };
 
-    async readUser(): Promise<User> {
+    async readUser(): Promise<User[]> {
 
         try {
             
             const data = await db('user').where('status', 1);
-            return new User(data);
+            const users:User[] = [];
+            data.forEach((i) => {
+                users.push(new User(i, i.hash));
+            });
+
+            return users;
 
         } catch (err) {
             throw new Error(err);
@@ -181,8 +184,7 @@ export class MysqlUserRepository implements IUserRepository {
             if (!data.length) 
                 throw new Error('Invalid email and / or password.');
 
-            const decryptPassword = AES.decrypt(data[0].password.toString(), process.env.SECRET_STRING).toString(enc.Utf8);
-
+            const decryptPassword = AES.decrypt(data[0].password, process.env.SECRET_STRING).toString(enc.Utf8);
             if (decryptPassword == password){
                 const users = new User(data[0]);
 

@@ -9,7 +9,6 @@ export class ReadCarUseCase {
     
     async execute() {
         const data = await this.carRepository.readCar();
-        console.log(data);
-        return new Car(data, data.hash); 
+        return data; 
     }
 }
