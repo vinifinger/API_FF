@@ -8,7 +8,7 @@ export interface ICreateCarRequestDTO {
     car_engine?: number;
     car_valve?: number;
     car_door?: number;
-    car_tire?: string;
+    car_tire?: number;
     car_gearbox?: string;
     car_weight?: number;
     car_year?: number;

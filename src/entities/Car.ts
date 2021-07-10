@@ -1,4 +1,4 @@
-import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 export class Car {
     public readonly id?: number;
     public hash?: string;
@@ -10,7 +10,7 @@ export class Car {
     public car_engine?: number;
     public car_valve?: number;
     public car_door?: number;
-    public car_tire?: string;
+    public car_tire?: number;
     public car_gearbox?: string;
     public car_weight?: number;
     public car_year?: number;
@@ -23,7 +23,7 @@ export class Car {
         Object.assign(this, props);
 
         if ( !hash && props ) {
-            this.hash = uuid();
+            this.hash = v4();
         }
     }
 }

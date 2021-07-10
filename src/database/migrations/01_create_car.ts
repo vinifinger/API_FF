@@ -1,5 +1,5 @@
 import * as knex from 'knex';
-import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 
 export async function up(knex: knex) {
     await knex.schema.createTable('car', table => {
@@ -9,6 +9,7 @@ export async function up(knex: knex) {
         table.string('car_model');
         table.string('car_mark');
         table.string('car_plate');
+        table.dateTime('date_insert').defaultTo(knex.fn.now());
         table.integer('car_status');
         table.string('car_brake');
         table.float('car_engine');
@@ -25,7 +26,7 @@ export async function up(knex: knex) {
     });
 
     await knex('car').insert({
-        hash: uuid(),
+        hash: v4(),
         car_name: 'Fit',
         car_model: 'CVT',
         car_mark: 'Honda',

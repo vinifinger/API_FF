@@ -24,11 +24,11 @@ routes.post('/user', (request, response) => {
     return createUserController.handle(request, response);
 });
 
-routes.patch('v1/user/:hash', (request, response) => {
+routes.patch('/v1/user/:hash', (request, response) => {
     return updateUserController.handle(request, response);
 });
 
-routes.delete('v1/user/:hash', (request, response) => {
+routes.delete('/v1/user/:hash', (request, response) => {
     return deleteUserController.handle(request, response);
 });
 
@@ -38,7 +38,7 @@ routes.post('/user/login', (request, response) => {
 
 
 // Car ----------
-routes.post('v1/car', (request, response) => {
+routes.post('/v1/car', (request, response) => {
     return createCarController.handle(request, response);
 });
 
@@ -46,11 +46,11 @@ routes.get('/v1/car', (request, response) => {
     return readCarController.handle(request, response);
 });
 
-routes.patch('v1/car/:hash', (request, response) => {
+routes.patch('/v1/car/:hash', (request, response) => {
     return updateCarController.handle(request, response);
 });
 
-routes.delete('v1/car/:hash', (request, response) => {
+routes.delete('/v1/car/:hash', (request, response) => {
     return deleteCarController.handle(request, response);
 });
 

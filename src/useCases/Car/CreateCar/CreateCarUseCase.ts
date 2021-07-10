@@ -9,7 +9,6 @@ export class CreateCarUseCase {
     
     async execute(data: ICreateCarRequestDTO) {
         const car = new Car(data);
-        console.log(car);
         
         const content = await this.carRepository.findCarByPlate(car.car_plate);
 

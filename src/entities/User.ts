@@ -1,4 +1,4 @@
-import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 
 export class User {
     public readonly id?: number;
@@ -24,7 +24,7 @@ export class User {
         Object.assign(this, props);
         console.log(this.hash);
         if ( !hash && props ) {
-            this.hash = uuid();
+            this.hash = v4();
         }
     }
 }

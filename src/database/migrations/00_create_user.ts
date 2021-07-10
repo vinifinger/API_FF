@@ -1,6 +1,6 @@
 import { AES } from 'crypto-ts';
 import * as knex from 'knex';
-import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 
 export async function up(knex: knex) {
     await knex.schema.createTable('user', table => {
@@ -11,6 +11,7 @@ export async function up(knex: knex) {
         table.string('email');
         table.string('cpf');
         table.string('rg');
+        table.dateTime('date_insert').defaultTo(knex.fn.now());
         table.integer('status');
         table.string('username');
         table.string('password');
@@ -26,7 +27,7 @@ export async function up(knex: knex) {
 
     await knex('user').insert({
         name: 'nome',
-        hash: uuid(),
+        hash: v4(),
         surname: 'sobrenome',
         email: 'root@root.com',
         cpf: '1234567890',
